@@ -31,7 +31,7 @@ var optionli = document.querySelectorAll('.option');
 var messageDiv = document.querySelector('.message');
     //quiz finish
 var quizEndConDiv = document.querySelector('#quizEndCon');
-var ScoreSpanDiv = document.querySelector('#ScoreSpan');
+var scoreSpanDiv = document.querySelector('#scoreSpan');
 var initialDiv = document.querySelector('.initial');
 var initBtn = document.querySelector('#initBtn');
 var initialMessageDiv = document.querySelector('.initialMessage');
@@ -42,16 +42,22 @@ var retunBtn = document.querySelector('#retunBtn');
 var resetBtn = document.querySelector('#resetBtn');
     
 var score = 0;
-var  timeLeft = 75;
+var timeLeft = 100;
 var timer = 0;
+var scoreSaveArray=[];
+var questionNumber = 0;
     //quiz object with questions and answers
 var quiz ={
-    question:["Where do style our web page mostly?","Which of these is not an element?","Wich one of these is the best syntax?"],
+    question:["Where do we style our web page mostly?","Which of these is not an element?","Wich one of these is the best syntax?"],
     option1:["HTML","<id>","="],
-    option2:["JS","<h4>","=="],
-    option3:["CSS","<button>","==="],
-    option4:["Console","<meta>","===="]
+    option2:["JS","<h4>","= ="],
+    option3:["CSS","<button>","= = ="],
+    option4:["Console","<meta>","= = = ="],
+    correct:["CSS","<id>","= = ="]
 };
+//startQuizBtn.addEventListener("click")
+
+
     //removes or adds .hide css to divs, header is visiable on all
 function changePage(event){
         //coding quiz intro
@@ -85,51 +91,109 @@ function changePage(event){
     }
 }
 //testing changePage function
-changePage(2);
+changePage(1);
 
 function renderQuestions(indy){
     questionDiv.textContent = quiz.question[indy];
-   optionli[0].textContent = "1. " + quiz.option1[indy];
-   optionli[1].textContent = "2. " + quiz.option2[indy];
-   optionli[2].textContent = "3. " + quiz.option3[indy];
-   optionli[3].textContent = "4. " + quiz.option4[indy];
+   optionli[0].textContent = " " + quiz.option1[indy];
+   optionli[1].textContent = " " + quiz.option2[indy];
+   optionli[2].textContent = " " + quiz.option3[indy];
+   optionli[3].textContent = " " + quiz.option4[indy];
 }
     // testing renderquestion function
-renderQuestions(0);
+//renderQuestions(0);
+
+quizQuestinConDiv.addEventListener("click",(event)=>{
+    var holder = event.target;
+
+    if(holder.textContent.slice(3) === quiz.correct[questionNumber]){
+        console.log("correct");
+    }else{
+        console.log("incorrect");
+        timeLeft -= 10;
+        timerDiv.textContent = "Time Left: " + timeLeft;
+    }
+    if (questionNumber < (quiz.question.length - 1) && timeLeft > 0){
+        questionNumber ++;
+        renderQuestions(questionNumber);
+    } else{
+        score = timeLeft;
+        changePage(3);
+        scoreSpanDiv.textContent = score;
+        clearInterval(timer);
+        timerDiv.textContent = "Time: " + timeLeft;
+    }
+})
 
 
+startQuizBtn.addEventListener("click",(event)=>{
+    event.preventDefault;
+    questionNumber = 0;
+    timeLeft = 100;
+    renderQuestions(questionNumber);
+    initialDiv.value = "";
+    changePage(2);
 
-    //function that is used to score
-function saveScore() {
-        // save related data as an object 
-    var playerScore = {
-        playerInitals: playerInitals.value.trim(),
-        score: score, // may need to change once var score is a function
+    timer = setInterval(function() {
+        timeLeft--;
+        if(timeLeft < 1 ) {
+          clearInterval(timer);
+          scoreSpanDiv.textContent=score;
+          changePage(3); 
+        }
+        timerDiv.textContent="Time: " + timeLeft;
+      }, 1000);
+});
 
-    };
-    //Use .setItem() to store object in storage and JSON.stringify to convert it as a string
-    localStorage.setItem("playerScore", JSON.stringify(playerScore));
-}
 
-function renderLastScore(){
+    //function that is used to save score and initals
+function saveScore(initial) {
+        scoreSaveArray.unshift(initial + ":" + score);
+            //Use .setItem() to store array in locasl storage and JSON.stringify to convert it as a string
+        localStorage.setItem("scoreSaveArray", JSON.stringify(scoreSaveArray));
+};
 
-    var lastScore = JSON.parse(localStorage.getItem("playerScore"));
-    
-    if (lastScore !== null){
-        document.getElementById("saved-score").innerHTML = lastScore.score;
-        document.getElementById("saved-playerInitals").innerHTML = lastScore.playerInitals;
-    } else {
-        return;
+function renderScore(){
+    var scoreStore = JSON.parse(localStorage.getItem("scoreSaveArray"));
+    highScoreOl.innerHTML="";
+    if (scoreStore !== null){
+        scoreSaveArray = scoreStore;
+        var displayScoreLength = scoreSaveArray.length;
+        for (var i = 0; i < displayScoreLength; i ++){
+            var list = document.createElement("li");
+            list.textContent = scoreSaveArray[i];
+            highScoreOl.appendChild(list);
+        }
     }
 }
 
-saveButton.addEventListener("click", function(event){
+initBtn.addEventListener("click", function(event){
     event.preventDefault();
-    saveScore();
-    renderLastscore();
+    scoreSaveArray=[];
+    var inital = initialDiv.value.trim();
+    if(inital){
+        initialMessageDiv.textContent = "";
+        var storeScore = JSON.parse(localStorage.getItem('scoreSaveArray'));
+        if(storeScore !==  null){
+            scoreSaveArray = storeScore;
+        }
+        saveScore(inital);
+        changePage(4);
+        renderScore();
+    }
 });
 
-function init(){
-    renderLastScore();
-}
-init();
+retunBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    timeLeft = 100;
+    timerDiv.textContent = "Time: " + timeLeft;
+    changePage(1);
+});
+
+resetBtn.addEventListener("click", (event)=>{
+    event.preventDefault();
+    localStorage.removeItem("scoreSaveArray");
+    highScoreOl = "";
+
+})
+
