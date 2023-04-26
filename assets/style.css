@@ -1,0 +1,12 @@
+*{
+    margin: 0%;
+}
+body{
+    border-style: solid;
+    margin: 2px;
+    padding-bottom: 15px;
+    border-radius: 8px;
+}
+.hide{
+    display: none;
+}

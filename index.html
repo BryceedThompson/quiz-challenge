@@ -8,24 +8,47 @@
     <title>Timed Quiz</title>
 </head>
 <body>
-    <ul>
-        <li>
-        </li>
-    </ul>
+    <header>
+        <div id="viewScore">View High Score</div>
+        <div id="timer">Time: 0</div>
+    </header>
 
-    <li>
-        <label for="msg">Initals</label>
-        <textarea id="msg" name="initials"></textarea>
-      </li>
-    </ul>
-    <button id = "save">save</button> 
-    <script src="./assets/script.js"></script>
-
-    <div class="card">
-        <h2>Last Saved Score</h2>
-        <p> Player's Initials: <span id="saved-playerInitials"></span></p>
-        <p> Player's Score: <span id="saved-score"></span></p>
-
+    <div id="quizStartCon">
+        <h2>Coding Quiz Challenge</h2>
+            <div>Try to answer the following code-releated questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</div>
+         <button id="startQuizBtn">Start Quiz</button>
     </div>
+    </div>
+
+    <div id= "quizQuestionCon">
+        <div id="question">placeholder</div>
+        <ol class="optionCon"> 
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+            <li class="option"></li>
+        </ol>
+        <div class="message"></div>
+    </div>
+
+    <div id="quizEndCon">
+        <h1>All done!</h1>
+        <div>Your Score is: <Span id="ScoreSpan">placeholder</Span></div>
+        <form>
+            <div>Enter initials: <input class="initial" type="text" placeholder="intial">
+                 <button id="initBtn"> Submit </button>
+            </div>
+            <div class="initialMessage"></div>
+        </form>
+    </div>
+
+    <div id="quizResetCon">
+        <h1>High Scores</h1>
+        <ol id="highScore"></ol>
+        <button id="retunBtn">Go Back</button>
+        <button id="resetBtn">Clear High Score</button>
+    </div>
+
+    <script src="./assets/script.js"></script>
 </body>
 </html>
