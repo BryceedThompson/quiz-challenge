@@ -1,12 +1,133 @@
+
+    /*fun note: the yellow and brown i used in the styling are the padres offical colors!*/
+
+
 *{
-    margin: 0%;
+    margin: 1%;
+    background-color: grey;
 }
+
+    /*style for our body*/
 body{
-    border-style: solid;
     margin: 2px;
     padding-bottom: 15px;
     border-radius: 8px;
 }
+
+    /*styles our header element containing the timer */
+header{
+    display: flex;
+    justify-content: end;
+    font-weight: bolder;
+    font-size: 30px;
+}
+
+    /*general styling for divs*/
+div{
+    display: flex;
+    justify-content: center;
+    min-width: 400px;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+    /*makes the button elements look nice*/
+button{
+    font-weight: bolder;
+    font-size:20px;
+    border-radius: 8px;
+    background-color: #FFC425;
+    color:black;
+    min-width: 200px;
+
+}
+    /*hover for our buttons*/
+button:hover{
+    background-color: #2F241D;
+    color: white;
+}
+    /*give active a yellow shadow*/
+button:active {
+    box-shadow: 5px 5px 10px #FFC425;
+}
+    /*input element for initials*/
+input{
+    font-weight: bolder;
+    font-size:20px;
+}
+
+    /*changes display base on the page we are on*/
 .hide{
     display: none;
+}
+    /*styles the options for our quiz section*/
+.option{
+    font-weight: bolder;
+    font-size:25px;
+    border-radius: 8px;
+    background-color: #FFC425;
+    color:black;
+    padding-top: 10px;
+}
+    /*changes background when we hover*/
+.option:hover{
+    background-color: #2F241D;
+    color: white;
+}
+
+    /*yellow shadow when option is activated*/
+.option:active {
+    box-shadow: 5px 5px 10px #FFC425;
+}
+
+    /*this id styles quiz start container*/
+#quizStartCon{
+    margin: 5%;
+    text-align: center;
+    padding:10%;
+    font-size:25px;
+    font-weight: bolder;
+    flex-direction: column;
+}
+
+    /*this id styles quiz questions container*/
+#quizQuestionCon{
+    margin: 5%;
+    text-align: center;
+    padding:10%;
+    font-size:25px;
+    font-weight: bolder;
+    flex-direction: column;
+}
+
+    /*this id styles quiz end container*/
+#quizEndCon{
+    margin: 5%;
+    text-align: center;
+    padding:10%;
+    font-size:25px;
+    font-weight: bolder;
+    flex-direction: column;
+}
+    /*this id styles the span element making our score pop out*/
+#quizEndCon div span{
+    background-color: #FFC425;
+}
+    /*this id styles our high score page  container*/
+#quizResetCon{
+    margin: 5%;
+    text-align: center;
+    padding:10%;
+    font-size:25px;
+    font-weight: bolder;
+    flex-direction: column;
+    
+}
+    /*this id and element refference make our highscore list alternate colors*/
+#highScore li:nth-child(even) {
+    background-color: #FFC425;
+}
+#highScore li:nth-child(odd) {
+    background-color: #2F241D;
+    color: white;
 }
