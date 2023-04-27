@@ -68,12 +68,6 @@ Open the link in my GitHub Repo!
 
 - https://developer.mozilla.org/en-US/docs/Web/CSS/:active
 
-- 
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for
 
-- 
-
-- 
-
-- 
-
-- 
+- https://www.w3schools.com/quiztest/quiztest.asp?qtest=HTML
