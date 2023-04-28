@@ -86,20 +86,13 @@ function renderQuestions(indy){
    optionli[2].textContent = " " + quiz.option3[indy];
    optionli[3].textContent = " " + quiz.option4[indy];
 }
-    // testing renderquestion function
-    //renderQuestions(0);
 
     //this adds an event listener for the question options in our quiz and checks if our selected option matches our correct one in the array
 quizQuestinConDiv.addEventListener("click",(event)=>{
     var holder = event.target;
-    console.log(holder.textContent); //test to see if button works
-    console.log(quiz.correct[questionNumber]); //test to see if correct array is working
-
         //this checks the selected option against the correct one and subtracts 10 seconds from the timer if they do not match
     if(holder.textContent === quiz.correct[questionNumber]){
-        console.log("correct"); //test to see if conparison works
     }else{
-        console.log("incorrect"); ////test to see if conparison works
         timeLeft -= 10;
         timerDiv.textContent = "Time: " + timeLeft;
     }
@@ -141,7 +134,7 @@ startQuizBtn.addEventListener("click",()=>{
     //function that is used to save score and initals
 function saveScore(initial) {
     scoreSaveArray.unshift(score + ": " + initial);
-    console.log(scoreSaveArray);// testing our saveScore
+    //console.log(scoreSaveArray);testing our saveScore
         //Use .setItem() to store array in locasl storage and JSON.stringify to convert it as a string
     localStorage.setItem("scoreSaveArray", JSON.stringify(scoreSaveArray));
 };
@@ -150,7 +143,6 @@ function renderScore(){
     var scoreStore = JSON.parse(localStorage.getItem("scoreSaveArray"));
     scoreStore.sort();
     scoreStore.reverse();
-    console.log(scoreStore);// testing order
     highScoreOl.innerHTML="";
 
     if (scoreStore !== null){
